@@ -1,3 +1,6 @@
 database_mysql_main:
-  type: mysql:10.1
-  disk: 2048
+    type: mysql:10.1
+    disk: 2048
+    configuration:
+        schemas:
+            - main
