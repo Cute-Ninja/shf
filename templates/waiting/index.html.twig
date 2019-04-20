@@ -3,5 +3,15 @@
 {% block title %}{{ parent() }}Waiting {% endblock %}
 
 {% block body %}
-    Waiting page
+    <h3>Waiting page</h3>
+
+    <div>
+        <ul>
+            {% for tag in tags %}
+                <li>{{ tag.name }}</li>
+            {% else %}
+                <li>No tags.</li>
+            {% endfor %}
+        </ul>
+    </div>
 {% endblock %}

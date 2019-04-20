@@ -18,9 +18,10 @@
         "symfony/yaml": "4.2.*"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-master",
         "friendsofphp/php-cs-fixer": "^2.12",
+        "roave/security-advisories": "dev-master",
         "symfony/debug-bundle": "4.2.*",
+        "symfony/maker-bundle": "^1.11",
         "symfony/phpunit-bridge": "4.2.*",
         "symfony/web-profiler-bundle": "4.2.*"
     },

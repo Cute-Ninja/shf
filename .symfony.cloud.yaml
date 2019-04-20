@@ -6,7 +6,9 @@ runtime:
     extensions:
         - apcu
         - mbstring
-        
+
+relationships:
+    db_main: "database_mysql_main:mysql"
 
 build:
     flavor: none

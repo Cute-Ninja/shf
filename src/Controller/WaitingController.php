@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +14,8 @@ class WaitingController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('waiting/index.html.twig');
+        $tags = $this->getDoctrine()->getRepository(Tag::class)->findAll();
+
+        return $this->render('waiting/index.html.twig', ['tags' => $tags]);
     }
 }
