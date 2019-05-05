@@ -12,6 +12,7 @@ use App\Exception\LazyLoadException;
  */
 abstract class AbstractBaseEntity implements BaseEntityInterface
 {
+    public const SERIALIZER_GROUP_DEFAULT = 'default';
     public const STATUS_ACTIVE = 'active';
     public const STATUS_DELETE = 'DELETE';
 

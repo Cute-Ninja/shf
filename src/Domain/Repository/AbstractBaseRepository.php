@@ -3,6 +3,7 @@
 namespace App\Domain\Repository;
 
 use App\Domain\Entity\AbstractBaseEntity;
+use App\Tools\StringUtils;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\QueryBuilder;
@@ -12,7 +13,10 @@ abstract class AbstractBaseRepository extends EntityRepository
     protected const ORDER_DIRECTION_ASC = 'ASC';
     protected const ORDER_DIRECTION_DESC = 'DESC';
 
-    abstract public function getAlias(): string;
+    public function getAlias(): string
+    {
+        return StringUtils::toSnakeCase($this->getClassName());
+    }
 
     public function computeAlias(string $alias = null): string
     {
