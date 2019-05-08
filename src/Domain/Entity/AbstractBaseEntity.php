@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\PersistentCollection;
 use App\Exception\LazyLoadException;
+use Symfony\Component\Serializer\Annotation as Serializer;
 
 /**
  * @ORM\MappedSuperclass()
@@ -22,6 +23,8 @@ abstract class AbstractBaseEntity implements BaseEntityInterface
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(name="id", type="integer")
+     *
+     * @Serializer\Groups({"default"})
      */
     protected $id;
 
@@ -29,6 +32,8 @@ abstract class AbstractBaseEntity implements BaseEntityInterface
      * @var string
      *
      * @ORM\Column(name="status", type="string", length=50, nullable=false)
+     *
+     * @Serializer\Groups({"default"})
      */
     protected $status;
 

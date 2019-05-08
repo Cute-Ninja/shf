@@ -17,4 +17,9 @@ class SuccessResponseBuilder extends AbstractBaseHttpResponseBuilder
 
         return $this->buildResponse($object, Response::HTTP_OK, $serializationGroups);
     }
+
+    public function created($object, array $serializationGroups = []): Response
+    {
+        return $this->buildResponse($object, Response::HTTP_CREATED, $serializationGroups);
+    }
 }

@@ -87,6 +87,28 @@ abstract class AbstractBaseRepository extends EntityRepository
         return $this;
     }
 
+    /**
+     * @param QueryBuilder    $queryBuilder
+     * @param null|int|int|[] $id
+     *
+     * @return bool
+     */
+    public function addCriterionId(QueryBuilder $queryBuilder, $id): bool
+    {
+        return $this->addCriterion($queryBuilder, $this->getAlias(), 'id', $id);
+    }
+
+    /**
+     * @param QueryBuilder         $queryBuilder
+     * @param string|string[]|null $status
+     *
+     * @return bool
+     */
+    public function addCriterionStatus(QueryBuilder $queryBuilder, $status): bool
+    {
+        return $this->addCriterion($queryBuilder, $this->getAlias(), 'status', $status);
+    }
+
     public function addCriterion(QueryBuilder $queryBuilder, string $alias, string $fieldName, $value, bool $exclude = false): bool
     {
         [$condition, $parameter, $value] = $this->computeCriterionCondition($alias, $fieldName, $value, $exclude);

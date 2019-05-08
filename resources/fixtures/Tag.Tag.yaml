@@ -1,0 +1,5 @@
+App\Domain\Entity\Tag\Tag:
+    tag_{running, bodybuilding, fitness, cycling, swimming}:
+        name: '<current()>'
+        createdDate: '<(new DateTime())>'
+        updatedDate: '<(new DateTime())>'

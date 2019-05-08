@@ -1,24 +1,49 @@
 security:
-    # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
+    encoders:
+        App\Domain\Entity\User\User:
+            algorithm: bcrypt
+            cost: 13
+
     providers:
-        in_memory: { memory: ~ }
+        user_provider:
+            entity: { class: App\Domain\Entity\User\User }
+
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+
+        api_doc:
+            pattern: ^/api/doc
+            security: false
+
+        api_login:
+            pattern: /api/login
+            stateless: true
             anonymous: true
+            form_login:
+                check_path:               /api/login_check
+                username_parameter:       username
+                password_parameter:       password
+                success_handler:          lexik_jwt_authentication.handler.authentication_success
+                failure_handler:          lexik_jwt_authentication.handler.authentication_failure
+                require_previous_session: false
 
-            # activate different ways to authenticate
+        api_register:
+            pattern: ^/api/users/registration
+            methods: [POST, PATCH]
+            anonymous: true
+            stateless: true
 
-            # http_basic: true
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
+        api_secured_area:
+            provider:  user_provider
+            pattern:   ^/api
+            stateless: true
+            guard:
+                authenticators:
+                    - shf_api.jwt_token_authenticator
 
-            # form_login: true
-            # https://symfony.com/doc/current/security/form_login_setup.html
-
-    # Easy way to control access for large sections of your site
-    # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api/users/registration, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }

@@ -6,9 +6,10 @@ use App\Domain\Entity\AbstractBaseEntity;
 use App\HttpResponseBuilder\ClientErrorResponseBuilder;
 use App\HttpResponseBuilder\ServerErrorResponseBuilder;
 use App\HttpResponseBuilder\SuccessResponseBuilder;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class AbstractBaseController
+abstract class AbstractBaseController extends AbstractController
 {
     private $successResponseBuilder;
 

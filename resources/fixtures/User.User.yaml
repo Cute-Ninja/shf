@@ -1,0 +1,12 @@
+App\Domain\Entity\User\User:
+    base_user (template):
+        password: "\\$2y\\$13\\$pNdqybc8hM6N.hkKvcSOL.z.qaUqrCva7fYbTXHSIVEjGMrx8UmE6" # Test1234
+        isAdmin: false
+        createdDate: '<(new DateTime())>'
+        updatedDate: '<(new DateTime())>'
+        status: active
+        roles: ['ROLE_TAG_READ'] # This list should match User::basicUserRoles()
+
+    user_ghriim (extends base_user):
+        username: Ghriim
+        email: "ghriim\\@fakemail.com"

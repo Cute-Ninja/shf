@@ -34,10 +34,23 @@ abstract class AbstractBaseHttpResponseBuilder
 
     protected function buildResponse($data, int $statusCode, ?array $serializationGroups = []): JsonResponse
     {
-        if (Response::HTTP_OK === $statusCode && false === empty($serializationGroups)) {
+        if (false === empty($serializationGroups) && true === $this->shouldSerializeData($data, $statusCode)) {
             $data = $this->serializer->normalize($data, null, ['groups' => $serializationGroups]);
         }
 
         return new JsonResponse($data, $statusCode);
+    }
+
+    private function shouldSerializeData($data, int $statusCode): bool
+    {
+        if (null === $data || true === empty($data)) {
+            return false;
+        }
+
+        if (false === in_array($statusCode, [Response::HTTP_OK, Response::HTTP_CREATED], true)) {
+            return false;
+        }
+
+        return true;
     }
 }
