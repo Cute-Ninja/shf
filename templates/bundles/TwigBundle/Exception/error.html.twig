@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+{% block title %}
+    We got a problem
+{% endblock %}
+{% block body %}
+    <div>
+        <p>
+            {{ status_code }} :: {{ exception.message }}
+        </p>
+    </div>
+{% endblock %}
