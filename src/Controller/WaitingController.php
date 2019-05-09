@@ -13,9 +13,22 @@ class WaitingController extends AbstractController
     /**
      * @Route(name="page-waiting", path="/", methods={"GET"})
      */
-    public function index(TagDataProvider $dataProvider): Response
+    public function index(\Swift_Mailer $mailer, TagDataProvider $dataProvider): Response
     {
         $tags = $dataProvider->getManyByCriteria(['status' => Tag::STATUS_ACTIVE]);
+
+        $message = (new \Swift_Message('Hello Email'))
+            ->setFrom('send@example.com')
+            ->setTo('recipient@example.com')
+            ->setBody(
+                $this->renderView(
+                    'emails/registration.html.twig',
+                    ['name' => 'Quentin']
+                ),
+                'text/html'
+            );
+
+        $mailer->send($message);
 
         return $this->render('waiting/index.html.twig', ['tags' => $tags]);
     }
