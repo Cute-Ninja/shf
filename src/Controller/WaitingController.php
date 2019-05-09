@@ -18,8 +18,8 @@ class WaitingController extends AbstractController
         $tags = $dataProvider->getManyByCriteria(['status' => Tag::STATUS_ACTIVE]);
 
         $message = (new \Swift_Message('Hello Email'))
-            ->setFrom('send@example.com')
-            ->setTo('recipient@example.com')
+            ->setFrom('wod.plan@gmail.com')
+            ->setTo('wod.plan@gmail.com')
             ->setBody(
                 $this->renderView(
                     'emails/registration.html.twig',
