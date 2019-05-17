@@ -29,8 +29,7 @@ abstract class AbstractMailGenerator
     protected $senderName;
 
     public function __construct(
-        TranslatorInterface
-        $translator,
+        TranslatorInterface $translator,
         EngineInterface $twig,
         MailShooter $mailShooter,
         string $senderMail,

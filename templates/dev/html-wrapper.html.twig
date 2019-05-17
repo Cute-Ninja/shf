@@ -1,0 +1,7 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} HTML Wrapper {% endblock %}
+
+{% block body %}
+    {{ data|json_encode() }}
+{% endblock %}

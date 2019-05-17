@@ -38,7 +38,6 @@ abstract class AbstractBaseRepository extends EntityRepository
         try {
             return $queryBuilder->getQuery()->getOneOrNullResult();
         } catch (NonUniqueResultException $exception) {
-            // @TODO Log this case
             return null;
         }
     }

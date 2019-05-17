@@ -97,6 +97,16 @@ class User extends AbstractBaseEntity implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var UserStats
+     *
+     * @ORM\OneToOne(targetEntity="App\Domain\Entity\User\UserStats")
+     * @ORM\JoinColumn(name="user_stats_id", referencedColumnName="id")
+     *
+     * @Serializer\Groups({"userStats"})
+     */
+    private $userStats;
+
     protected function getDefaultStatus(): string
     {
         return self::STATUS_TO_ACTIVATE;
@@ -179,6 +189,16 @@ class User extends AbstractBaseEntity implements UserInterface
         }
 
         return in_array($role, $this->getRoles(), true);
+    }
+
+    public function getUserStats(): UserStats
+    {
+        return $this->userStats;
+    }
+
+    public function setUserStats(UserStats $userStats): void
+    {
+        $this->userStats = $userStats;
     }
 
     public function getSalt(): ?string

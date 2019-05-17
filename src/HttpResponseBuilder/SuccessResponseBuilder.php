@@ -2,12 +2,11 @@
 
 namespace App\HttpResponseBuilder;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class SuccessResponseBuilder extends AbstractBaseHttpResponseBuilder
 {
-    public function buildSingleObjectResponse($object, array $serializationGroups = []): JsonResponse
+    public function buildSingleObjectResponse($object, array $serializationGroups = []): Response
     {
         if (null === $object || (is_array($object) && empty($object))) {
             $errorBuilder = new ClientErrorResponseBuilder();

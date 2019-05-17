@@ -11,16 +11,22 @@ use Symfony\Component\Serializer\Mapping\Loader\AnnotationLoader;
 use Symfony\Component\Serializer\Normalizer\DateTimeNormalizer;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Templating\EngineInterface;
 
 abstract class AbstractBaseHttpResponseBuilder
 {
-    /**
-     * @var Serializer
-     */
+    public const DEFAULT_SERIALIZATION_GROUP = 'default';
+
+    /** @var EngineInterface  */
+    private $twig;
+
+    /** @var Serializer */
     protected $serializer;
 
-    public function __construct()
+    public function __construct(EngineInterface $twig)
     {
+        $this->twig = $twig;
+
         if (null === $this->serializer) {
             $classMetadataFactory = new ClassMetadataFactory(new AnnotationLoader(new AnnotationReader()));
             $objectNormalizer = new ObjectNormalizer($classMetadataFactory);
@@ -32,13 +38,16 @@ abstract class AbstractBaseHttpResponseBuilder
         }
     }
 
-    protected function buildResponse($data, int $statusCode, ?array $serializationGroups = []): JsonResponse
+    protected function buildResponse($data, int $statusCode, ?array $serializationGroups = []): Response
     {
+        $serializationGroups = $this->buildSerializationGroups($serializationGroups);
         if (false === empty($serializationGroups) && true === $this->shouldSerializeData($data, $statusCode)) {
             $data = $this->serializer->normalize($data, null, ['groups' => $serializationGroups]);
         }
 
-        return new JsonResponse($data, $statusCode);
+        return new Response($this->twig->render('dev/html-wrapper.html.twig', ['data' => $data]));
+
+        //return new JsonResponse($data, $statusCode);
     }
 
     private function shouldSerializeData($data, int $statusCode): bool
@@ -52,5 +61,21 @@ abstract class AbstractBaseHttpResponseBuilder
         }
 
         return true;
+    }
+
+    private function buildSerializationGroups($serializationGroups): array
+    {
+        if (true === empty($serializationGroups)) {
+            return [self::DEFAULT_SERIALIZATION_GROUP];
+        }
+
+        if (in_array(self::DEFAULT_SERIALIZATION_GROUP, $serializationGroups)) {
+            return $serializationGroups;
+        }
+
+
+        $serializationGroups[] = self::DEFAULT_SERIALIZATION_GROUP;
+
+        return $serializationGroups;
     }
 }

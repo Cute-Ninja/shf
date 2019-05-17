@@ -80,7 +80,7 @@ class UserController extends AbstractUserRestrictedApiController
     {
         $user = $this->getCurrentUser($request);
 
-        return $this->getSuccessResponseBuilder()->buildSingleObjectResponse($user);
+        return $this->getSuccessResponseBuilder()->buildSingleObjectResponse($user, ['userStats']);
     }
 
     /**

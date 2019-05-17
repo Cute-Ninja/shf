@@ -1,0 +1,11 @@
+App\Domain\Entity\User\UserStats:
+    base_user_stats (template):
+        createdDate: '<(new DateTime())>'
+        updatedDate: '<(new DateTime())>'
+        status: active
+
+    user_stats_ghriim (extends base_user_stats):
+        distanceTotal: 999.99
+        distanceOfTheWeek: 48.3
+        caloriesTotal: 15667
+        caloriesOfTheWeek: 895

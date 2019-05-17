@@ -6,15 +6,20 @@ use App\Domain\Entity\AbstractBaseEntity;
 use App\HttpResponseBuilder\ClientErrorResponseBuilder;
 use App\HttpResponseBuilder\ServerErrorResponseBuilder;
 use App\HttpResponseBuilder\SuccessResponseBuilder;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 abstract class AbstractBaseController extends AbstractController
 {
+    /** @var SuccessResponseBuilder */
     private $successResponseBuilder;
 
+    /** @var ClientErrorResponseBuilder */
     private $clientErrorResponseBuilder;
 
+    /** @var ServerErrorResponseBuilder */
     private $serverErrorResponseBuilder;
 
     public function __construct(

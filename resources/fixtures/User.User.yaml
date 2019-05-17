@@ -10,3 +10,4 @@ App\Domain\Entity\User\User:
     user_ghriim (extends base_user):
         username: Ghriim
         email: "ghriim\\@fakemail.com"
+        userStats: '@user_stats_ghriim'

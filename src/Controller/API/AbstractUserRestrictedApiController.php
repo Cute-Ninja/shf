@@ -33,9 +33,9 @@ abstract class AbstractUserRestrictedApiController extends AbstractBaseControlle
      */
     protected function getCurrentUser(Request $request, array $selects = []): User
     {
-        $userId = 1;
+        $userId = $this->getUser()->getId();
         $user = $this->userDataProvider->getOneById($userId, $selects);
-        if (null !== $user) {
+        if (null === $user) {
             throw new UserShouldExistException($userId);
         }
 
