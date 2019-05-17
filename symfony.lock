@@ -442,6 +442,9 @@
             "config/packages/test/swiftmailer.yaml"
         ]
     },
+    "symfony/templating": {
+        "version": "v4.2.8"
+    },
     "symfony/translation": {
         "version": "3.3",
         "recipe": {

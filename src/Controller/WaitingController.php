@@ -15,7 +15,7 @@ class WaitingController extends AbstractController
      */
     public function index(TagDataProvider $dataProvider): Response
     {
-        $tags = $dataProvider->getManyByCriteria(['status' => Tag::STATUS_ACTIVE]);
+        $tags = []; //$dataProvider->getManyByCriteria(['status' => Tag::STATUS_ACTIVE]);
 
         return $this->render('waiting/index.html.twig', ['tags' => $tags]);
     }

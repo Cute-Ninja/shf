@@ -8,7 +8,7 @@ use App\Domain\Notificator\Sender\Mail\MailShooter;
 use App\Domain\POPO\MailRecipientPOPO;
 use App\Domain\POPO\MailSenderPOPO;
 use App\Domain\POPO\Notification\BatchMailPOPO;
-use Symfony\Bundle\TwigBundle\TwigEngine;
+use Symfony\Component\Templating\EngineInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractMailGenerator
@@ -16,7 +16,7 @@ abstract class AbstractMailGenerator
     /** @var TranslatorInterface */
     protected $translator;
 
-    /** @var TwigEngine */
+    /** @var EngineInterface */
     protected $twig;
 
     /** @var MailShooter */
@@ -28,7 +28,7 @@ abstract class AbstractMailGenerator
     /** @var string */
     protected $senderName;
 
-    public function __construct(TranslatorInterface $translator, TwigEngine $twig, MailShooter $mailShooter)
+    public function __construct(TranslatorInterface $translator, EngineInterface $twig, MailShooter $mailShooter)
     {
         $this->translator = $translator;
         $this->twig = $twig;
