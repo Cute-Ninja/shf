@@ -1,9 +1,7 @@
 imports:
+    - { resource: config.yaml }
     - { resource: services/mail_services.yaml }
     - { resource: services/security_services.yaml }
-
-parameters:
-    locale: 'fr'
 
 services:
     # default configuration for services in *this* file

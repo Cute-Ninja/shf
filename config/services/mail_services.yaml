@@ -6,3 +6,6 @@ services:
 
     App\Domain\Notificator\:
         resource: '../../src/Domain/Notificator/'
+        bind:
+            $senderMail: '%sender_mail_default%'
+            $senderName: '%sender_name_default%'

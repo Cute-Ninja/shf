@@ -28,10 +28,18 @@ abstract class AbstractMailGenerator
     /** @var string */
     protected $senderName;
 
-    public function __construct(TranslatorInterface $translator, EngineInterface $twig, MailShooter $mailShooter)
-    {
+    public function __construct(
+        TranslatorInterface
+        $translator,
+        EngineInterface $twig,
+        MailShooter $mailShooter,
+        string $senderMail,
+        string $senderName
+    ) {
         $this->translator = $translator;
         $this->twig = $twig;
+        $this->senderMail = $senderMail;
+        $this->senderName = $senderName;
     }
 
     protected function buildSingleMailPOPO(User $user, string $subjectId, string $templateId, array $attributes = []): SingleMailPOPO

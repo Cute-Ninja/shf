@@ -1,0 +1,4 @@
+parameters:
+    locale: 'fr'
+    sender_mail_default: 'no-reply@superherofactory.com'
+    sender_name_default: 'SHF Coach'
