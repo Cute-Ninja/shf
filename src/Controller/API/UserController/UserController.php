@@ -104,7 +104,7 @@ class UserController extends AbstractUserRestrictedApiController
             return $this->getClientErrorResponseBuilder()->jsonResponseFormError($form);
         }
 
-        $userDataPersister->create($user, true);
+        $userDataPersister->create($user);
 
         return $this->getSuccessResponseBuilder()->created($user, $this->getSerializationGroup($request));
     }
