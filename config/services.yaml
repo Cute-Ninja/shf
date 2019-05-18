@@ -25,11 +25,3 @@ services:
     App\Event\Listener\JWTCreatedListener:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }
-
-    App\Event\Listener\Dev\ApiRequestEventListener:
-        arguments:
-            $defaultUserId: '%default_user_id%'
-            $wrapApiResponse: '%wrap_api_response%'
-        tags:
-            - { name: kernel.event_listener, event: kernel.request, method: addTokenToRequest, priority: 999 }
-            - { name: kernel.event_listener, event: kernel.response, method: convertResponseToHtml }
