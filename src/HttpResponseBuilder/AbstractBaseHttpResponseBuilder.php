@@ -17,7 +17,7 @@ abstract class AbstractBaseHttpResponseBuilder
 {
     public const DEFAULT_SERIALIZATION_GROUP = 'default';
 
-    /** @var EngineInterface  */
+    /** @var EngineInterface */
     private $twig;
 
     /** @var Serializer */
@@ -45,9 +45,7 @@ abstract class AbstractBaseHttpResponseBuilder
             $data = $this->serializer->normalize($data, null, ['groups' => $serializationGroups]);
         }
 
-        return new Response($this->twig->render('dev/html-wrapper.html.twig', ['data' => $data]));
-
-        //return new JsonResponse($data, $statusCode);
+        return new JsonResponse($data, $statusCode);
     }
 
     private function shouldSerializeData($data, int $statusCode): bool
@@ -72,7 +70,6 @@ abstract class AbstractBaseHttpResponseBuilder
         if (in_array(self::DEFAULT_SERIALIZATION_GROUP, $serializationGroups)) {
             return $serializationGroups;
         }
-
 
         $serializationGroups[] = self::DEFAULT_SERIALIZATION_GROUP;
 

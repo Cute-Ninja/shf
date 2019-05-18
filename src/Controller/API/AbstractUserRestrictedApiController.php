@@ -8,7 +8,6 @@ use App\Exception\UserShouldExistException;
 use App\HttpResponseBuilder\ClientErrorResponseBuilder;
 use App\HttpResponseBuilder\ServerErrorResponseBuilder;
 use App\HttpResponseBuilder\SuccessResponseBuilder;
-use Symfony\Component\HttpFoundation\Request;
 
 abstract class AbstractUserRestrictedApiController extends AbstractBaseController
 {
@@ -31,7 +30,7 @@ abstract class AbstractUserRestrictedApiController extends AbstractBaseControlle
     /**
      * @throws UserShouldExistException
      */
-    protected function getCurrentUser(Request $request, array $selects = []): User
+    protected function getCurrentUser(array $selects = []): User
     {
         $userId = $this->getUser()->getId();
         $user = $this->userDataProvider->getOneById($userId, $selects);

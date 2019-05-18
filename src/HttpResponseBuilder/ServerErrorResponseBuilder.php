@@ -2,7 +2,6 @@
 
 namespace App\HttpResponseBuilder;
 
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
 class ServerErrorResponseBuilder extends AbstractBaseHttpResponseBuilder

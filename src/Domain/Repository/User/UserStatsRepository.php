@@ -6,5 +6,4 @@ use App\Domain\Repository\AbstractBaseRepository;
 
 class UserStatsRepository extends AbstractBaseRepository
 {
-
 }

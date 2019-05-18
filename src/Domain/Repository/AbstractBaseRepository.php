@@ -13,16 +13,6 @@ abstract class AbstractBaseRepository extends EntityRepository
     protected const ORDER_DIRECTION_ASC = 'ASC';
     protected const ORDER_DIRECTION_DESC = 'DESC';
 
-    public function getAlias(): string
-    {
-        return StringUtils::toSnakeCase($this->getClassName());
-    }
-
-    public function computeAlias(string $alias = null): string
-    {
-        return $alias ?? $this->getAlias();
-    }
-
     public function getQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder($this->getAlias())
@@ -75,7 +65,7 @@ abstract class AbstractBaseRepository extends EntityRepository
         return $queryBuilder->getQuery()->getResult();
     }
 
-    public function addCriteria(QueryBuilder $queryBuilder, array $criteria = []): AbstractBaseRepository
+    protected function addCriteria(QueryBuilder $queryBuilder, array $criteria = []): AbstractBaseRepository
     {
         foreach ($criteria as $field => $value) {
             if ($field) {
@@ -86,13 +76,23 @@ abstract class AbstractBaseRepository extends EntityRepository
         return $this;
     }
 
+    protected function getAlias(): string
+    {
+        return StringUtils::toSnakeCase($this->getClassName());
+    }
+
+    protected function computeAlias(string $alias = null): string
+    {
+        return $alias ?? $this->getAlias();
+    }
+
     /**
      * @param QueryBuilder    $queryBuilder
      * @param null|int|int|[] $id
      *
      * @return bool
      */
-    public function addCriterionId(QueryBuilder $queryBuilder, $id): bool
+    protected function addCriterionId(QueryBuilder $queryBuilder, $id): bool
     {
         return $this->addCriterion($queryBuilder, $this->getAlias(), 'id', $id);
     }
@@ -103,12 +103,12 @@ abstract class AbstractBaseRepository extends EntityRepository
      *
      * @return bool
      */
-    public function addCriterionStatus(QueryBuilder $queryBuilder, $status): bool
+    protected function addCriterionStatus(QueryBuilder $queryBuilder, $status): bool
     {
         return $this->addCriterion($queryBuilder, $this->getAlias(), 'status', $status);
     }
 
-    public function addCriterion(QueryBuilder $queryBuilder, string $alias, string $fieldName, $value, bool $exclude = false): bool
+    protected function addCriterion(QueryBuilder $queryBuilder, string $alias, string $fieldName, $value, bool $exclude = false): bool
     {
         [$condition, $parameter, $value] = $this->computeCriterionCondition($alias, $fieldName, $value, $exclude);
         if (null === $condition) {
@@ -122,7 +122,7 @@ abstract class AbstractBaseRepository extends EntityRepository
         return true;
     }
 
-    public function addCriterionLike(QueryBuilder $queryBuilder, string $alias, string $fieldName, string $value): bool
+    protected function addCriterionLike(QueryBuilder $queryBuilder, string $alias, string $fieldName, string $value): bool
     {
         if (null === $value) {
             return false;
@@ -135,7 +135,7 @@ abstract class AbstractBaseRepository extends EntityRepository
         return true;
     }
 
-    public function addOrderBys(QueryBuilder $queryBuilder, array $orderBys = []): AbstractBaseRepository
+    protected function addOrderBys(QueryBuilder $queryBuilder, array $orderBys = []): AbstractBaseRepository
     {
         foreach ($orderBys as $orderBy => $direction) {
             if ($orderBy) {
@@ -146,7 +146,7 @@ abstract class AbstractBaseRepository extends EntityRepository
         return $this;
     }
 
-    public function addOrderBy(QueryBuilder $queryBuilder, string $alias, string $fieldName, string $direction): void
+    protected function addOrderBy(QueryBuilder $queryBuilder, string $alias, string $fieldName, string $direction): void
     {
         if (false === in_array($direction, [self::ORDER_DIRECTION_DESC, self::ORDER_DIRECTION_ASC], true)) {
             throw new \LogicException("$direction is not a valid value for order by 'direction' parameter.");
@@ -154,7 +154,7 @@ abstract class AbstractBaseRepository extends EntityRepository
         $queryBuilder->addOrderBy($alias.'.'.$fieldName, $direction);
     }
 
-    public function addSelects(QueryBuilder $queryBuilder, array $selects = []): AbstractBaseRepository
+    protected function addSelects(QueryBuilder $queryBuilder, array $selects = []): AbstractBaseRepository
     {
         foreach ($selects as $select) {
             if ($select) {
@@ -165,7 +165,12 @@ abstract class AbstractBaseRepository extends EntityRepository
         return $this;
     }
 
-    public function cleanQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
+    protected function getDefaultSelects(): array
+    {
+        return [];
+    }
+
+    private function cleanQueryBuilder(QueryBuilder $queryBuilder): QueryBuilder
     {
         $this->cleanQueryBuilderDqlPart($queryBuilder, 'join');
         $this->cleanQueryBuilderDqlPart($queryBuilder, 'select');
@@ -177,7 +182,7 @@ abstract class AbstractBaseRepository extends EntityRepository
      * @param QueryBuilder $queryBuilder
      * @param string       $dqlPartName  ('join', 'select', ...)
      */
-    public function cleanQueryBuilderDqlPart(QueryBuilder $queryBuilder, string $dqlPartName): void
+    private function cleanQueryBuilderDqlPart(QueryBuilder $queryBuilder, string $dqlPartName): void
     {
         $dqlPart = $queryBuilder->getDQLPart($dqlPartName);
         $newDqlPart = [];
@@ -220,7 +225,7 @@ abstract class AbstractBaseRepository extends EntityRepository
         }
     }
 
-    public function computeCriterionCondition(string $alias, string $fieldName, $value, bool $exclude = false): array
+    private function computeCriterionCondition(string $alias, string $fieldName, $value, bool $exclude = false): array
     {
         if (null === $value) {
             return [null, null, null];
@@ -245,13 +250,8 @@ abstract class AbstractBaseRepository extends EntityRepository
         return [$condition, $parameterField, $parameterValue];
     }
 
-    public function addDefaultSelect(array $selects = []): array
+    private function addDefaultSelect(array $selects = []): array
     {
         return array_merge($selects, $this->getDefaultSelects());
-    }
-
-    public function getDefaultSelects(): array
-    {
-        return [];
     }
 }

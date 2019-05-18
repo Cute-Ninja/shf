@@ -5,3 +5,7 @@ create_db:
 
 load_db: create_db
 	php bin/console hautelook:fixtures:load --append
+
+cs_fixer:
+	vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix src/
+	vendor/friendsofphp/php-cs-fixer/php-cs-fixer fix tests/

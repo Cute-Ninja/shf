@@ -1,4 +1,6 @@
 parameters:
     locale: 'fr'
+    default_user_id: '%env(resolve:DEFAULT_USER_ID)%'
+    wrap_api_response: '%env(resolve:WRAP_API_RESPONSE)%'
     sender_mail_default: 'no-reply@superherofactory.com'
     sender_name_default: 'SHF Coach'

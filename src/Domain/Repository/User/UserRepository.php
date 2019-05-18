@@ -4,6 +4,7 @@ namespace App\Domain\Repository\User;
 
 use App\Domain\Entity\User\User;
 use App\Domain\Repository\AbstractBaseRepository;
+use Doctrine\ORM\QueryBuilder;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -12,6 +13,21 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class UserRepository extends AbstractBaseRepository implements UserProviderInterface, UserLoaderInterface
 {
+    //###################################################################################################################
+    //                                                   SELECT                                                         #
+    //###################################################################################################################
+
+    public function addSelectUserStats(QueryBuilder $queryBuilder, string $alias = null)
+    {
+        $queryBuilder->leftJoin($this->computeAlias($alias).'.userStats', 'user_stats');
+        $queryBuilder->addSelect('user_stats');
+    }
+
+    public function getDefaultSelects(): array
+    {
+        return ['userStats'];
+    }
+
     //###################################################################################################################
     //                                               AUTHENTICATION                                                     #
     //###################################################################################################################

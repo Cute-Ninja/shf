@@ -2,7 +2,6 @@
 
 namespace App\Domain\Notificator\Sender\Mail;
 
-use App\Domain\Entity\User\User;
 use App\Domain\Notification\POPO\SingleMailPOPO;
 use App\Domain\POPO\MailRecipientPOPO;
 use App\Domain\POPO\MailSenderPOPO;

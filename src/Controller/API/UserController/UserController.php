@@ -76,9 +76,9 @@ class UserController extends AbstractUserRestrictedApiController
      *
      * @throws UserShouldExistException
      */
-    public function getMe(Request $request): Response
+    public function getMe(): Response
     {
-        $user = $this->getCurrentUser($request);
+        $user = $this->getCurrentUser();
 
         return $this->getSuccessResponseBuilder()->buildSingleObjectResponse($user, ['userStats']);
     }
