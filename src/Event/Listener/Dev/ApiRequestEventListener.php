@@ -29,7 +29,7 @@ class ApiRequestEventListener
         $this->wrapApiResponse = $wrapApiResponse;
     }
 
-    public function addTokenToRequest(GetResponseEvent $event)
+    public function addTokenToRequest(GetResponseEvent $event): void
     {
         $request = $event->getRequest();
         $path = $request->getPathInfo();
@@ -46,9 +46,11 @@ class ApiRequestEventListener
         $request->headers->add(['Authorization' => "Bearer $token"]);
     }
 
-    public function convertResponseToHtml(FilterResponseEvent $event)
+    public function convertResponseToHtml(FilterResponseEvent $event): void
     {
-        if (false === $this->wrapApiResponse) {
+        $request = $event->getRequest();
+        $path = $request->getPathInfo();
+        if (false === $this->wrapApiResponse || 0 !== strpos($path, '/api')) {
             return;
         }
 
@@ -56,7 +58,6 @@ class ApiRequestEventListener
             return;
         }
 
-        $request = $event->getRequest();
         if (false === $request->headers->has('Accept') || false === strpos($request->headers->get('Accept'), 'text/html')) {
             return;
         }
