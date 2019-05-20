@@ -13,7 +13,7 @@ use Symfony\Component\Serializer\Annotation as Serializer;
  */
 abstract class AbstractBaseEntity implements BaseEntityInterface
 {
-    public const SERIALIZER_GROUP_DEFAULT = 'default';
+    public const GROUP_DEFAULT = 'default';
     public const STATUS_ACTIVE = 'active';
     public const STATUS_DELETE = 'DELETE';
 
@@ -24,7 +24,7 @@ abstract class AbstractBaseEntity implements BaseEntityInterface
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(name="id", type="integer")
      *
-     * @Serializer\Groups({"default"})
+     * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      */
     protected $id;
 
@@ -33,7 +33,7 @@ abstract class AbstractBaseEntity implements BaseEntityInterface
      *
      * @ORM\Column(name="status", type="string", length=50, nullable=false)
      *
-     * @Serializer\Groups({"default"})
+     * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      */
     protected $status;
 

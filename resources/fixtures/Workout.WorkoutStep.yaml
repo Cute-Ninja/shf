@@ -1,0 +1,25 @@
+App\Domain\Entity\Workout\WorkoutStep:
+    base_workout_step (template):
+        status: active
+        createdDate: '<(new DateTime())>'
+        updatedDate: '<(new DateTime())>'
+
+    workout_ares_step_1 (extends base_workout_step):
+        name: ares step 1
+        workout: '@workout_ares'
+
+    workout_ares_step_2 (extends base_workout_step):
+        name: ares step 2
+        workout: '@workout_ares'
+
+    workout_diane_step_1 (extends base_workout_step):
+        name: diane step 1
+        workout: '@workout_diane'
+
+    workout_diane_step_2 (extends base_workout_step):
+        name: diane step 2
+        workout: '@workout_diane'
+
+    workout_diane_step_3 (extends base_workout_step):
+        name: diane step 3
+        workout: '@workout_diane'

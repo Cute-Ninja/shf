@@ -22,6 +22,9 @@ services:
     App\Domain\DataInteractor\:
         resource: '../src/Domain/DataInteractor/'
 
+    App\UseCase\:
+        resource: '../src/UseCase/'
+
     App\Event\Listener\JWTCreatedListener:
         tags:
             - { name: kernel.event_listener, event: lexik_jwt_authentication.on_jwt_created, method: onJWTCreated }

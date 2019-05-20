@@ -18,7 +18,7 @@ abstract class AbstractBaseHttpResponseBuilder
     public const DEFAULT_SERIALIZATION_GROUP = 'default';
 
     /** @var EngineInterface */
-    private $twig;
+    protected $twig;
 
     /** @var Serializer */
     protected $serializer;

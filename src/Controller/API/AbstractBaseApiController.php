@@ -9,7 +9,7 @@ use App\HttpResponseBuilder\SuccessResponseBuilder;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-abstract class AbstractBaseController extends AbstractController
+abstract class AbstractBaseApiController extends AbstractController
 {
     /** @var SuccessResponseBuilder */
     private $successResponseBuilder;
@@ -35,7 +35,7 @@ abstract class AbstractBaseController extends AbstractController
         $requestGroups = $request->get('groups');
         $groups = explode(',', $requestGroups);
         if ('test' !== $requestGroups) {
-            $groups[] = AbstractBaseEntity::SERIALIZER_GROUP_DEFAULT;
+            $groups[] = AbstractBaseEntity::GROUP_DEFAULT;
         }
 
         return $groups;

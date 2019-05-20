@@ -16,14 +16,14 @@ abstract class AbstractBaseRepository extends EntityRepository
     public function getQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder($this->getAlias())
-            ->select('DISTINCT '.$this->getAlias());
+                    ->select('DISTINCT '.$this->getAlias());
     }
 
     public function findOneByCriteria(array $criteria = [], array $selects = []): ?AbstractBaseEntity
     {
         $queryBuilder = $this->getQueryBuilder();
         $this->addCriteria($queryBuilder, $criteria)
-            ->addSelects($queryBuilder, $this->addDefaultSelect($selects));
+             ->addSelects($queryBuilder, $this->addDefaultSelect($selects));
         $this->cleanQueryBuilder($queryBuilder);
         try {
             return $queryBuilder->getQuery()->getOneOrNullResult();
@@ -36,8 +36,8 @@ abstract class AbstractBaseRepository extends EntityRepository
     {
         $queryBuilder = $this->getQueryBuilder();
         $this->addCriteria($queryBuilder, $criteria)
-            ->addOrderBys($queryBuilder, $orders)
-            ->addSelects($queryBuilder, $this->addDefaultSelect($selects));
+             ->addSelects($queryBuilder, $this->addDefaultSelect($selects))
+             ->addOrderBys($queryBuilder, $orders);
         $this->cleanQueryBuilder($queryBuilder);
 
         return $queryBuilder;

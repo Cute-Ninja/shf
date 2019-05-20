@@ -37,7 +37,7 @@ class User extends AbstractBaseEntity implements UserInterface
      * )
      * @Assert\Length(min=4, max=15, groups={"registration", "update"})
      *
-     * @Serializer\Groups({"default", "test"})
+     * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      */
     private $username;
 
@@ -49,7 +49,7 @@ class User extends AbstractBaseEntity implements UserInterface
      * @Assert\NotBlank(groups={"registration", "update"})
      * @Assert\Email(groups={"registration", "update"})
      *
-     * @Serializer\Groups({"default", "test"})
+     * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      */
     private $email;
 
@@ -70,7 +70,7 @@ class User extends AbstractBaseEntity implements UserInterface
     /**
      * @var bool
      *
-     * @Serializer\Groups({"default", "test"})
+     * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      * @ORM\Column(name="is_admin", type="boolean")
      */
     private $isAdmin = false;
@@ -93,7 +93,7 @@ class User extends AbstractBaseEntity implements UserInterface
      * @var string[]
      *
      * @ORM\Column(name="roles", type="simple_array")
-     * @Serializer\Groups({"admin", "test"})
+     * @Serializer\Groups({"admin"})
      */
     private $roles;
 

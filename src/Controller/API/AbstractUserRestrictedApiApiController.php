@@ -9,7 +9,7 @@ use App\HttpResponseBuilder\ClientErrorResponseBuilder;
 use App\HttpResponseBuilder\ServerErrorResponseBuilder;
 use App\HttpResponseBuilder\SuccessResponseBuilder;
 
-abstract class AbstractUserRestrictedApiController extends AbstractBaseController
+abstract class AbstractUserRestrictedApiApiController extends AbstractBaseApiController
 {
     /**
      * @var UserDataProvider

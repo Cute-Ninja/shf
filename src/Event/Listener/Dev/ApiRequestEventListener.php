@@ -4,6 +4,7 @@ namespace App\Event\Listener\Dev;
 
 use App\Domain\DataInteractor\DataProvider\User\UserDataProvider;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 
@@ -50,7 +51,9 @@ class ApiRequestEventListener
     {
         $request = $event->getRequest();
         $path = $request->getPathInfo();
-        if (false === $this->wrapApiResponse || 0 !== strpos($path, '/api')) {
+        if (false === $this->wrapApiResponse
+            || 0 !== strpos($path, '/api')
+            || Response::HTTP_INTERNAL_SERVER_ERROR === $event->getResponse()->getStatusCode()) {
             return;
         }
 

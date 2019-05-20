@@ -1,0 +1,13 @@
+App\Domain\Entity\Workout\Workout:
+    base_workout (template):
+        status: active
+        createdDate: '<(new DateTime())>'
+        updatedDate: '<(new DateTime())>'
+
+    workout_ares (extends base_workout):
+        name: ares
+        description: First workout ever created on SHF
+
+    workout_diane (extends base_workout):
+        name: diane
+        description: Second workout created on SHF

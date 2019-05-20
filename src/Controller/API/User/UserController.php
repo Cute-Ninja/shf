@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Controller\API\UserController;
+namespace App\Controller\API\User;
 
-use App\Controller\API\AbstractUserRestrictedApiController;
+use App\Controller\API\AbstractUserRestrictedApiApiController;
 use App\Domain\DataInteractor\DataPersister\User\UserDataPersister;
 use App\Domain\DataInteractor\DataProvider\User\UserDataProvider;
 use App\Domain\Entity\User\User;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserController extends AbstractUserRestrictedApiController
+class UserController extends AbstractUserRestrictedApiApiController
 {
     /**
      * @Route(name="user_get_one", path="/users/{id}", methods={"GET"}, requirements={"id": "\d+"})
