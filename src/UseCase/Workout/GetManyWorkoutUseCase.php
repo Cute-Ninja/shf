@@ -8,27 +8,14 @@ use App\Registry\WorkoutStatusRegistry;
 use App\UseCase\AbstractBaseUseCase;
 use Symfony\Component\HttpFoundation\Request;
 
+/**
+ * @method Workout[] execute(Request $request)
+ */
 class GetManyWorkoutUseCase extends AbstractBaseUseCase
 {
-    /** @var WorkoutDataProvider */
-    private $workoutDataProvider;
-
     public function __construct(WorkoutDataProvider $workoutDataProvider)
     {
-        $this->workoutDataProvider = $workoutDataProvider;
-    }
-
-    /**
-     * @param Request $request
-     *
-     * @return Workout[]
-     */
-    public function execute(Request $request): array
-    {
-        return $this->workoutDataProvider->getManyByCriteria(
-            $this->buildCriteria($request),
-            $this->buildSelects($request)
-        );
+        $this->dataProvider = $workoutDataProvider;
     }
 
     protected function buildCriteria(Request $request): array

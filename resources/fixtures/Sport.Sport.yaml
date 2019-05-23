@@ -1,0 +1,30 @@
+App\Domain\Entity\Sport\Sport:
+    base_sport (template):
+        createdDate: '<(new DateTime())>'
+        updatedDate: '<(new DateTime())>'
+
+    sport_running (extends base_sport):
+        name: Running
+
+    sport_cycling (extends base_sport):
+        name: Cycling
+
+    sport_road_running (extends base_sport):
+        name: Road running
+        parent: '@sport_running'
+
+    sport_trail_running (extends base_sport):
+        name: Trail running
+        parent: '@sport_running'
+
+    sport_treadmill_running (extends base_sport):
+        name: Treadmill running
+        parent: '@sport_running'
+
+    sport_road_cycling (extends base_sport):
+        name: Road cycling
+        parent: '@sport_cycling'
+
+    sport_mountain_bike_cycling (extends base_sport):
+        name: Mountain bike
+        parent: '@sport_cycling'

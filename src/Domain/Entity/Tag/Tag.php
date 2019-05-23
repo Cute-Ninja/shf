@@ -6,6 +6,7 @@ use App\Domain\Entity\AbstractBaseEntity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="App\Domain\Repository\Tag\TagRepository")
  */
 class Tag extends AbstractBaseEntity
@@ -13,7 +14,7 @@ class Tag extends AbstractBaseEntity
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    protected $name;
 
     protected function getDefaultStatus(): string
     {

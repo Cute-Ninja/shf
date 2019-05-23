@@ -39,7 +39,7 @@ class User extends AbstractBaseEntity implements UserInterface
      *
      * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      */
-    private $username;
+    protected $username;
 
     /**
      * @var string
@@ -51,7 +51,7 @@ class User extends AbstractBaseEntity implements UserInterface
      *
      * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      */
-    private $email;
+    protected $email;
 
     /**
      * @var string
@@ -65,7 +65,7 @@ class User extends AbstractBaseEntity implements UserInterface
      *     groups={"registration", "update"}
      * )
      */
-    private $password;
+    protected $password;
 
     /**
      * @var bool
@@ -73,7 +73,7 @@ class User extends AbstractBaseEntity implements UserInterface
      * @Serializer\Groups({AbstractBaseEntity::GROUP_DEFAULT})
      * @ORM\Column(name="is_admin", type="boolean")
      */
-    private $isAdmin = false;
+    protected $isAdmin = false;
 
     /**
      * @var string
@@ -81,13 +81,13 @@ class User extends AbstractBaseEntity implements UserInterface
      * @Serializer\Groups({"admin"})
      * @ORM\Column(name="confirmation_key", type="string", length=255, nullable=true, unique=true)
      */
-    private $confirmationKey;
+    protected $confirmationKey;
 
     /**
      * @var DateTime|null
      * @ORM\Column(name="confirmation_key_expiration", type="datetime", nullable=true)
      */
-    private $confirmationKeyExpiration;
+    protected $confirmationKeyExpiration;
 
     /**
      * @var string[]
@@ -95,7 +95,7 @@ class User extends AbstractBaseEntity implements UserInterface
      * @ORM\Column(name="roles", type="simple_array")
      * @Serializer\Groups({"admin"})
      */
-    private $roles;
+    protected $roles;
 
     /**
      * @var UserStats
@@ -105,7 +105,7 @@ class User extends AbstractBaseEntity implements UserInterface
      *
      * @Serializer\Groups({"userStats"})
      */
-    private $userStats;
+    protected $userStats;
 
     protected function getDefaultStatus(): string
     {
