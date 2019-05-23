@@ -53,7 +53,7 @@ class ApiRequestEventListener
         $path = $request->getPathInfo();
         if (false === $this->wrapApiResponse
             || 0 !== strpos($path, '/api')
-            || Response::HTTP_INTERNAL_SERVER_ERROR === $event->getResponse()->getStatusCode()) {
+            || Response::HTTP_OK !== $event->getResponse()->getStatusCode()) {
             return;
         }
 
