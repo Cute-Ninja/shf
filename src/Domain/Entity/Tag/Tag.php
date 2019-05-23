@@ -4,15 +4,18 @@ namespace App\Domain\Entity\Tag;
 
 use App\Domain\Entity\AbstractBaseEntity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Table(name="tag")
  * @ORM\Entity(repositoryClass="App\Domain\Repository\Tag\TagRepository")
+ *
+ * @UniqueEntity(fields={"name"})
  */
 class Tag extends AbstractBaseEntity
 {
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=100, unique=true)
      */
     protected $name;
 
