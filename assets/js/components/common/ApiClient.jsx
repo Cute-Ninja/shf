@@ -22,9 +22,9 @@ function getMany(url, parameters = null) {
         });
 }
 
-function getOne(url, id, parameters = null) {
+function getOne(url, parameters = null) {
     let urlParameters = parameters ? "?" + urlEncodeParameters(parameters) : "";
-    return fetch(url + "/" + id + urlParameters)
+    return fetch(url + urlParameters)
         .then(response => {
             return new Promise((success) => {
                 if (200 === response.status) {

@@ -12,7 +12,7 @@ class Workout extends React.Component {
     }
 
     componentDidMount() {
-        ApiClient.getOne("/api/workouts", this.props.match.params.id)
+        ApiClient.getOne("/api/workouts/" + this.props.match.params.id)
             .then((result) => {
                 this.setState({
                     isLoaded: true,
