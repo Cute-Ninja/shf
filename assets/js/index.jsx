@@ -1,10 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Workout from '../components/workout/Workout'
-import {register, unregister} from '../serviceWorker'
+import App from './App'
+import { unregister } from './serviceWorker'
 
 ReactDOM.render(
-    <Workout />,
+    <App />,
     document.getElementById('root')
 );
 

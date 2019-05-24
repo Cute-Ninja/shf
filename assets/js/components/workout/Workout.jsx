@@ -2,12 +2,21 @@ import React from "react";
 
 class Workout extends React.Component {
 
-    constructor() {
+    constructor(props) {
         super();
+        this.state = {
+            workout: props.workout
+        }
     }
 
     render() {
-        return <div>Hello workout</div>;
+        const { workout } = this.state;
+        return (
+            <div>
+                <h3>{ workout.name }</h3>
+                <p>{ workout.description }</p>
+            </div>
+        );
     }
 }
 
