@@ -9,12 +9,12 @@ use Doctrine\ORM\EntityRepository;
 
 abstract class AbstractBaseDataProvider extends AbstractBaseDataInteractor
 {
-    public function getOneById(int $id, array $selects = []): BaseEntityInterface
+    public function getOneById(int $id, array $selects = []): ?BaseEntityInterface
     {
         return $this->getOneByCriteria(['id' => $id], $selects);
     }
 
-    public function getOneByCriteria(array $criteria, array $selects = []): BaseEntityInterface
+    public function getOneByCriteria(array $criteria, array $selects = []): ?BaseEntityInterface
     {
         return $this->getRepository()->findOneByCriteria($criteria, $selects);
     }

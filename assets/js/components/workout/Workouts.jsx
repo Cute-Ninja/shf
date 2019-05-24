@@ -1,5 +1,6 @@
 import React from "react";
-import Workout from "./Workout";
+import { Link } from "react-router-dom";
+import ApiClient from "../common/ApiClient";
 
 class Workouts extends React.Component {
 
@@ -7,37 +8,22 @@ class Workouts extends React.Component {
         super();
         this.state = {
             isLoaded: false,
-            error: null,
             workouts: []
-        }
+        };
     }
 
     componentDidMount() {
-        fetch("/api/workouts")
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        workouts: result
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            );
+        ApiClient.getMany("/api/workouts")
+            .then((result) => {
+                this.setState({
+                    isLoaded: true,
+                    workouts: result.data
+                });
+            });
     }
 
     render() {
-        const { isLoaded, error, workouts } = this.state;
-
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        }
-
+        const { isLoaded, workouts } = this.state;
         if (false === isLoaded ) {
             return <div>Loading...</div>
         }
@@ -45,7 +31,12 @@ class Workouts extends React.Component {
         return (
             <ul>
                 { workouts.map(workout =>
-                    <li><Workout workout={workout}/></li>
+                    <li>
+                        <Link to={ '/workout/' + workout.id}>
+                            <h3>{ workout.name }</h3>
+                        </Link>
+                        <p>{ workout.description }</p>
+                    </li>
                 )}
             </ul>
         );
