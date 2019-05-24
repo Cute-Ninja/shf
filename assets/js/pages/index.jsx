@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Workout from '../components/workout/Workout'
-import serviceWorker from '../serviceWorker'
+import {register, unregister} from '../serviceWorker'
 
 ReactDOM.render(
     <Workout />,
@@ -11,4 +11,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+unregister();
